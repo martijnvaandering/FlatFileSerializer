@@ -150,7 +150,7 @@ B
             var orig = "ADRName                          Name2                         Name3                         Street                           PLZ123Worms                         ";
             var obj = serializer.Deserialize(orig, true);
             Assert.IsNotNull(obj);
-            var newstr = serializer.Serialize(obj,false);
+            var newstr = serializer.Serialize(obj, false);
             Assert.IsNotNull(newstr);
             Assert.AreEqual(orig, newstr);
         }
@@ -259,6 +259,31 @@ R;;0000;1;0;Verbrauchsmaterialien;",
 
             //Assert.AreEqual("R;;0000;1;0;Verbrauchsmaterialien;",
             //    strHead);
+        }
+
+
+        [TestMethod]
+        public void DataNorm001ChangeEntry_Ok()
+        {
+            var serializer = new Serializer<DataNorm001ChangeEntryA>();
+            var text = serializer.Serialize(new DataNorm001ChangeEntryA()
+            {
+                ChangeFlag = "N",
+                ItemCode = "abta576",
+                TextType = "00",
+                Description1 = "BWT AQA therm HFK SRC",
+                Description2 = "mobiler Heizungsfllkoffer",
+                PriceType = "1",
+                UnitQuantityMultiplier = "0",
+                UnitCode = "ST",
+                Price = "99500",
+                DiscountGroup = "3404",
+                ItemGroup = "41",
+                LongTextKey = ""
+
+            }, true);
+
+            Assert.AreNotEqual("A;N;abta576;00;BWT AQA therm HFK SRC;mobiler Heizungsfllkoffer;1;0;ST;99500;3404;41;;", text);
         }
 
 
