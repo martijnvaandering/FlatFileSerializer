@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 ﻿using DeWeTechNet.Logic.DataNorm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+=======
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
 using System.Text.RegularExpressions;
 
 namespace FlatFileSerializer.Tests
@@ -150,7 +154,11 @@ B
             var orig = "ADRName                          Name2                         Name3                         Street                           PLZ123Worms                         ";
             var obj = serializer.Deserialize(orig, true);
             Assert.IsNotNull(obj);
+<<<<<<< HEAD
             var newstr = serializer.Serialize(obj,false);
+=======
+            var newstr = serializer.Serialize(obj);
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
             Assert.IsNotNull(newstr);
             Assert.AreEqual(orig, newstr);
         }
@@ -197,7 +205,11 @@ B
 001";
             var serializer = new Serializer<ICMHeader>();
             var obj = serializer.Deserialize(orig, true);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
             Assert.IsNotNull(obj);
             Assert.AreEqual(obj.Debnummer, "00001111");
 
@@ -206,6 +218,7 @@ B
             var newStrCompare = Regex.Replace(newStr, @"\s", string.Empty);
             Assert.AreEqual(origCompare, newStrCompare);
         }
+<<<<<<< HEAD
 
         [TestMethod]
         public void DatanormHeadTest()
@@ -267,5 +280,7 @@ R;;0000;1;0;Verbrauchsmaterialien;",
         {
             Assert.AreEqual("100118", new DateTime(2018, 1, 10).ToString("ddMMyy"));
         }
+=======
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
     }
 }

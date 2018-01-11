@@ -49,8 +49,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="DataNormHead.cs" />
     <Compile Include="DataNormRabatEntry.cs" />
+=======
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
     <Compile Include="ICMHeader.cs" />
     <Compile Include="ICMItems.cs" />
     <Compile Include="UGLAddress.cs" />

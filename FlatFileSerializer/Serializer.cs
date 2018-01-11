@@ -108,6 +108,7 @@ namespace FlatFileSerializer
             }
         }
 
+<<<<<<< HEAD
         public string Serialize(T obj, bool trim = false)
         {
             if (typeof(IEnumerable).IsAssignableFrom(typeof(T)))
@@ -118,6 +119,10 @@ namespace FlatFileSerializer
                 return string.Join("\r\n", itemList);
             }
 
+=======
+        public string Serialize<T>(T obj)
+        {
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
             var attribute = typeof(T).GetCustomAttributes(true).FirstOrDefault(a => a is FixedLengthSerializableAttribute) as FixedLengthSerializableAttribute;
             if (attribute == null)
             {
@@ -145,6 +150,7 @@ namespace FlatFileSerializer
 
                 if (value.Length > prop.StringLengthAttribute.Length)
                 {
+<<<<<<< HEAD
                     value = value.Substring(0, prop.StringLengthAttribute.Length);
                 }
                 value += string.Join(string.Empty, Enumerable.Repeat(" ", prop.StringLengthAttribute.Length - value.Length));
@@ -163,10 +169,19 @@ namespace FlatFileSerializer
                 output += "\r\n" + data;
             }
 
+=======
+                    value = value.Substring(0, prop.StringLengthAttribute.Length);  
+                }
+                value += string.Join(string.Empty, Enumerable.Repeat(" ", prop.StringLengthAttribute.Length - value.Length));
+                output += value + attribute.Separator + (IsMultiLine ? Environment.NewLine : string.Empty);
+            }
+
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
             return output;
 
         }
 
+<<<<<<< HEAD
         private IEnumerable<string> SerializeIEnumerable<TInner>(IEnumerable<TInner> input, bool trim = false) where TInner : class
         {
             if (input == null)
@@ -183,6 +198,8 @@ namespace FlatFileSerializer
             }
         }
 
+=======
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
         public class SerializableProperty
         {
             public Action<object, string> SetValue { get; set; }
@@ -193,6 +210,7 @@ namespace FlatFileSerializer
 
             public SerializableProperty(PropertyInfo propertyInfo)
             {
+<<<<<<< HEAD
                 Name = propertyInfo.Name;
                 StringLengthAttribute = propertyInfo.GetCustomAttribute<FixedLengthStringAttribute>();
                 var stringFormatAttribute = propertyInfo.GetCustomAttribute<StringFormatAttribute>();
@@ -200,6 +218,8 @@ namespace FlatFileSerializer
                 {
                     StringFormat = stringFormatAttribute.Format;
                 }
+=======
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
 
                 if (propertyInfo.CanWrite)
                 {
@@ -230,6 +250,7 @@ namespace FlatFileSerializer
 
                 if (propertyInfo.CanRead)
                 {
+<<<<<<< HEAD
                     if (string.IsNullOrEmpty(StringFormat))
                     {
                         GetValue = (obj) => propertyInfo.GetValue(obj).ToString();
@@ -238,18 +259,36 @@ namespace FlatFileSerializer
                     {
                         GetValue = (obj) => propertyInfo.PropertyType == typeof(DateTime) ? ((DateTime)propertyInfo.GetValue(obj)).ToString(StringFormat) : string.Format(StringFormat, propertyInfo.GetValue(obj));
                     }
+=======
+                    GetValue = (obj) => string.IsNullOrEmpty(StringFormat) ?
+                        propertyInfo.GetValue(obj).ToString() :
+                        string.Format(StringFormat, propertyInfo.GetValue(obj));
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
                 }
                 else
                 {
                     GetValue = (obj) => null;
                 }
+<<<<<<< HEAD
+=======
+                Name = propertyInfo.Name;
+                StringLengthAttribute = propertyInfo.GetCustomAttribute<FixedLengthStringAttribute>();
+                var stringFormatAttribute = propertyInfo.GetCustomAttribute<StringFormatAttribute>();
+                if (stringFormatAttribute != null)
+                {
+                    StringFormat = stringFormatAttribute.Format;
+                }
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
             }
         }
 
         public class SerializableClassProperty
         {
             public Action<object, object> SetValue { get; set; }
+<<<<<<< HEAD
             public Func<object, object> GetValue { get; set; }
+=======
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
             public string Name { get; set; }
             public FixedLengthSerializableAttribute FixedLengthSerializableAttribute { get; set; }
             public Type ClassType { get; set; }
@@ -267,6 +306,7 @@ namespace FlatFileSerializer
                         Debug.WriteLine($"Property \"{a}\" can not be written");
                     };
                 }
+<<<<<<< HEAD
 
                 if (propertyInfo.CanRead)
                 {
@@ -277,6 +317,8 @@ namespace FlatFileSerializer
                     GetValue = (obj) => null;
                 }
 
+=======
+>>>>>>> 8b14eb0245e4d487337136546137e12251da5d1f
                 Name = propertyInfo.Name;
                 FixedLengthSerializableAttribute = propertyInfo.GetCustomAttribute<FixedLengthSerializableAttribute>();
                 ClassType = propertyInfo.PropertyType;
