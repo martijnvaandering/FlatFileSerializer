@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlatFileSerializer.Tests
 {
+    [FixedLengthSerializable(Separator = ";")]
     public class DataNorm001ChangeEntryB
     {
         [FixedLengthString(1, 0)]

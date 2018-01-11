@@ -28,5 +28,8 @@ namespace DeWeTechNet.Logic.DataNorm
         [FixedLengthSerializable]
         public IEnumerable<DataNormRabatEntry> RabattEntries { get; set; }
 
+        [FixedLengthSerializable]
+        public IEnumerable<DataNorm001> DataNorm001 { get; set; }
+
     }
 }

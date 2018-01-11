@@ -272,7 +272,7 @@ R;;0000;1;0;Verbrauchsmaterialien;",
                 ItemCode = "abta576",
                 TextType = "00",
                 Description1 = "BWT AQA therm HFK SRC",
-                Description2 = "mobiler Heizungsfllkoffer",
+                Description2 = "mobiler Heizungskoffer",
                 PriceType = "1",
                 UnitQuantityMultiplier = "0",
                 UnitCode = "ST",
@@ -282,8 +282,62 @@ R;;0000;1;0;Verbrauchsmaterialien;",
                 LongTextKey = ""
 
             }, true);
+            Debug.WriteLine(text);
+            Assert.AreEqual("A;N;abta576;00;BWT AQA therm HFK SRC;mobiler Heizungskoffer;1;0;ST;99500;3404;41;;", text);
+        }
 
-            Assert.AreNotEqual("A;N;abta576;00;BWT AQA therm HFK SRC;mobiler Heizungsfllkoffer;1;0;ST;99500;3404;41;;", text);
+        [TestMethod]
+        public void DataNorm001ChangeEntry_AB_Ok()
+        {
+            var serializer = new Serializer<Head>();
+            var text = serializer.Serialize(new Head()
+            {
+                CurrencyIndicator = "EUR",
+                Date = new DateTime(2018, 1, 10),
+                Version = 4,
+                InformationText1 = "Datanorm  Rabattsatz       Disk.Nr.: 001",
+                InformationText2 = "    Weitergabe der Daten nur mit schrift",
+                InformationText3 = "l.Genehmigung",
+                DataNorm001 = new List<DataNorm001>() {
+                    new DataNorm001(){
+                        DataNorm001ChangeEntryA = new DataNorm001ChangeEntryA()
+                        {
+                            ChangeFlag = "N",
+                            ItemCode = "abta576",
+                            TextType = "00",
+                            Description1 = "BWT AQA therm HFK SRC",
+                            Description2 = "mobiler Heizungsfllkoffer",
+                            PriceType = "1",
+                            UnitQuantityMultiplier = "0",
+                            UnitCode = "ST",
+                            Price = "99500",
+                            DiscountGroup = "3404",
+                            ItemGroup = "41",
+                            LongTextKey = ""
+                        },
+                        DataNorm001ChangeEntryB = new DataNorm001ChangeEntryB()
+                        {
+                            ProcessingFlag = "N",
+                            ItemCode = "abta576",
+                            MatchCode = "20415",
+                            AlternativeItemCode = "",
+                            CatalogPage = "",
+                            UnknownField = "",
+                            GTIN = "",
+                            AccessNumber = "",
+                            ItemGroup = "",
+                            CostType = 0,
+                            PackagingAmount = 1,
+                            SupplierReference = "",
+                            Reference = ""
+                        }
+                    }
+                }
+
+            }, true);
+
+            Debug.WriteLine(text);
+            Assert.IsNotNull(text);
         }
 
 

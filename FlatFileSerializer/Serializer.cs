@@ -159,11 +159,17 @@ namespace FlatFileSerializer
             {
                 var serializer = Activator.CreateInstance(typeof(Serializer<>).MakeGenericType(scp.ClassType));
                 var inputObj = scp.GetValue(obj);
-                var data = serializer.GetType().GetMethod("Serialize").Invoke(serializer, new object[] { inputObj, trim }) as string;
-                output += "\r\n" + data;
+                if (inputObj != null)
+                {
+                    var data = serializer.GetType().GetMethod("Serialize").Invoke(serializer, new object[] { inputObj, trim }) as string;
+                    if (!string.IsNullOrEmpty(data))
+                    {
+                        output += "\r\n" + data;
+                    }
+                }
             }
 
-            return output;
+            return output.Replace("\r\n\r\n", "\r\n"); //TODO: damn that replace is ugly
 
         }
 

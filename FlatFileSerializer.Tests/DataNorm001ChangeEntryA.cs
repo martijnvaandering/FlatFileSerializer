@@ -1,6 +1,6 @@
 ﻿namespace FlatFileSerializer.Tests
 {
-    [FixedLengthSerializable]
+    [FixedLengthSerializable(Separator = ";")]
     public class DataNorm001ChangeEntryA
     {
         [FixedLengthString(1, 0)]
@@ -18,7 +18,7 @@
         [FixedLengthString(2, 6)]
         public string PriceType { get; set; }
         [FixedLengthString(1, 7)]
-        public string UnitQuantityMultiplier { get; set; }  
+        public string UnitQuantityMultiplier { get; set; }
         [FixedLengthString(2, 9)]
         public string UnitCode { get; set; }
         [FixedLengthString(8, 10)]
